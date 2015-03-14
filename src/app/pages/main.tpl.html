@@ -1,0 +1,19 @@
+<div class="tPage" ng-controller="d3Ctrl as ctrl">
+    <neopixel-ring data="ctrl.data"></neopixel-ring>
+    <!--<svg neopixel-ring width="500" height="500">
+    </svg>-->
+    <div class="rgbSliders">
+        <div id="rBack" class="colorBack">
+            <input id="r" type="range" min="0" max="255" step="1" ng-model="ctrl.red"/>
+        </div>
+        <div id="gBack" class="colorBack">
+            <input id="g" type="range" min="0" max="255" step="1" ng-model="ctrl.green"/>
+        </div>
+        <div id="bBack" class="colorBack">
+            <input id="b" type="range" min="0" max="255" step="1" ng-model="ctrl.blue"/>
+        </div>
+        <div id="wBack" class="colorBack">
+            <input id="w" type="range" min="0" max="255" step="1" ng-model="ctrl.brightness"/>
+        </div>
+    </div>
+</div>

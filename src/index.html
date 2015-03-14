@@ -1,0 +1,47 @@
+<%
+var getFileList = function(fileGlobOption) {
+var distDir = grunt.config.get('folders.base.out');
+var fileGlob = grunt.config.get(fileGlobOption);
+return grunt.file.expand({cwd:distDir},fileGlob);
+};
+%>
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Basic Angular App</title>
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link rel="apple-touch-icon" href="static/images/app_icon.png" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="mobile-web-app-capable" content="yes">
+
+        <!-- Lo-Dash template to generate CSS includes -->
+        <% _.forEach(getFileList('files.dist.css'), function(src) { %><link href="<%= src %>" rel="stylesheet">
+        <% }); %>
+    </head>
+    <body>
+        <div class="main" ng-include="'pages/main.tpl.html'"></div>
+
+        <!-- Lo-Dash template to generate script includes -->
+
+        <!-- Livereload for debugging -->
+        <%
+        if (grunt.config('settings.debug.livereload.enable')) {
+        %><script src="<%= grunt.config('settings.debug.livereload.url') %>"></script><%
+        }
+        %>
+
+        <!-- Vendor Javascript Files -->
+        <% _.forEach(getFileList('files.dist.js.vendor'), function(src) { %><script src="<%= src %>"></script>
+        <% }); %>
+        <!-- App Javascript Files -->
+        <% _.forEach(getFileList('files.dist.js.app'), function(src) { %><script src="<%= src %>"></script>
+        <% }); %>
+        <!-- Component Javascript Files -->
+        <% _.forEach(getFileList('files.dist.js.components'), function(src) { %><script src="<%= src %>"></script>
+        <% }); %>
+    </body>
+</html>
